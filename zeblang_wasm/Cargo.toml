@@ -8,3 +8,4 @@ crate-type = ["cdylib"]
 
 [dependencies]
 wasm-bindgen = "0.2"
+zeblang = { git = "https://github.com/zeb33n/zeblang.git", branch="master" }
