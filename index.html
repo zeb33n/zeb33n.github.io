@@ -1,1 +1,13 @@
-hello
+<!doctype html>
+<html>
+  <script>
+   import init, {greet} from "./zeblang_wasm/pkg/zeblang_wasm.js";
+
+  function hw() {
+    init().then(() => {greet("Zeb");});
+    }
+
+  </script>
+<button onclick="hw()">run wasm</button>
+</html>
+
