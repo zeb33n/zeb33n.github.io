@@ -1,8 +1,28 @@
 <!doctype html>
 <html>
-<script src="./js/compile.js" type="module"></script>
 
+<head>
+  <style>
+    textarea {
+      resize: none;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      padding: 12px 20px;
+      background-color: #f8f8f8;
+    }
+  </style>
+</head>
 
-<button id="runBtn">run wasm</button>
+<body>
+  <script src="./js/compile.js" type="module"></script>
+  <div>
+    <button id="runBtn">run zeblang</button>
+  </div>
+
+  <textarea id="codeEditor" rows="25" cols="80">
+  </textarea>
+</body>
+
+</html>
 
 </html>

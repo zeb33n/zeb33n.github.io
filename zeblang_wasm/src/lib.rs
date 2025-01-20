@@ -1,6 +1,7 @@
 use wasm_bindgen::prelude::*;
 
 use zeblang;
+mod interpret;
 
 #[wasm_bindgen]
 extern "C" {
