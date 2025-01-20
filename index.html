@@ -2,10 +2,12 @@
 <html>
   <script type="module">
    import init, {greet} from "./zeblang_wasm/pkg/zeblang_wasm.js";
-
-  function hw() {
-    init().then(() => {greet("Zeb");});
-    }
+      init().then(() => {
+        greet("WebAssembly");
+      });
+  <!-- function hw() { -->
+    <!-- init().then(() => {greet("Zeb");}); -->
+    <!-- } -->
 
   </script>
 <button onclick="hw()">run wasm</button>
