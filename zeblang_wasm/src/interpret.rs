@@ -1,9 +1,16 @@
+use std::collections::HashMap;
+
 use zeblang::{ExpressionNode, StatementNode};
 
-struct Interpreter {}
+struct Interpreter {
+    vars: HashMap<String, i32>,
+}
 
 pub fn interpret(parse_tree: Vec<StatementNode>) -> Result<i32, String> {
-    return Interpreter {}.run(parse_tree);
+    return Interpreter {
+        vars: HashMap::new(),
+    }
+    .run(parse_tree);
 }
 
 impl Interpreter {
@@ -15,7 +22,10 @@ impl Interpreter {
                     out = self.interpret_exit(node);
                     break;
                 }
-                StatementNode::Assign(_, _) => todo!(),
+                StatementNode::Assign(name, node) => {
+                    let value = self.interpret_expr(node)?;
+                    self.vars.insert(name, value);
+                }
                 _ => todo!(),
             }
         }
@@ -32,6 +42,11 @@ impl Interpreter {
             ExpressionNode::Value(value) => {
                 value.parse::<i32>().ok().ok_or("invalid int".to_string())
             }
+            ExpressionNode::Var(name) => Ok(self
+                .vars
+                .get(&name)
+                .ok_or("Undefined var".to_string())?
+                .to_owned()),
             ExpressionNode::Infix(node1, infix, node2) => {
                 let v1 = self.interpret_expr(*node1)?;
                 let v2 = self.interpret_expr(*node2)?;
