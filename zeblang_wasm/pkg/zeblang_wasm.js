@@ -82,6 +82,15 @@ export function greet(name) {
     wasm.greet(ptr0, len0);
 }
 
+/**
+ * @param {string} src
+ */
+export function do_compile(src) {
+    const ptr0 = passStringToWasm0(src, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    const len0 = WASM_VECTOR_LEN;
+    wasm.do_compile(ptr0, len0);
+}
+
 async function __wbg_load(module, imports) {
     if (typeof Response === 'function' && module instanceof Response) {
         if (typeof WebAssembly.instantiateStreaming === 'function') {
