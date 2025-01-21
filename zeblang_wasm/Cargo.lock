@@ -178,7 +178,7 @@ dependencies = [
 [[package]]
 name = "zeblang"
 version = "0.1.0"
-source = "git+https://github.com/zeb33n/zeblang.git?branch=master#34918dde74627c6242afaa4edb458277ac620b88"
+source = "git+https://github.com/zeb33n/zeblang.git?branch=master#b064a285a726ecc2942eb39103da28bed7fd65ce"
 dependencies = [
  "serde",
  "serde_json",
