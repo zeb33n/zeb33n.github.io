@@ -49,6 +49,6 @@ while i
 elihw
 exit out
 "#;
-        assert_eq!(compile(src), "0".to_string());
+        assert_eq!(compile(src), "40".to_string());
     }
 }

@@ -10,9 +10,8 @@ struct Interpreter<'a> {
 }
 
 pub fn interpret(parse_tree: Vec<StatementNode>) -> Result<i32, String> {
-    let mut context: HashMap<String, i32> = HashMap::new();
     return Interpreter {
-        vars: &mut context,
+        vars: &mut HashMap::new(),
         iter: parse_tree.iter(),
         out: Ok(0),
     }
@@ -62,7 +61,6 @@ impl<'a> Interpreter<'a> {
         let mut nests = 1;
         let mut stmnts: Vec<StatementNode> = Vec::new();
         while nests != 0 {
-            // we need to be able to swap this iterator out
             let next = self.iter.next().ok_or("While loop not closed")?;
             match next {
                 &StatementNode::EndWhile => nests -= 1,
