@@ -6,7 +6,12 @@ function getText() {
 
 function hw() {
  init().then(() => {
-   do_compile(getText());
+   var stdout = document.getElementById("stdout");
+   var stdexit = document.getElementById("stdexit")
+   stdout.innerHTML = "";
+   stdexit.innerHTML = "";
+   stdexit.innerHTML += "exit: ";
+   stdexit.innerHTML += do_compile(getText());
  });
 }
 

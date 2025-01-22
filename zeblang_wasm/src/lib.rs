@@ -5,18 +5,8 @@ mod interpret;
 use interpret::interpret;
 
 #[wasm_bindgen]
-extern "C" {
-    pub fn alert(s: &str);
-}
-
-#[wasm_bindgen]
-pub fn greet(name: &str) {
-    alert(&format!("Hello, {}!", name));
-}
-
-#[wasm_bindgen]
-pub fn do_compile(src: &str) {
-    alert(&compile(src))
+pub fn do_compile(src: &str) -> String {
+    return compile(src);
 }
 
 pub fn compile(src: &str) -> String {
