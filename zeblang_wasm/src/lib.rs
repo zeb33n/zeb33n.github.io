@@ -9,6 +9,7 @@ pub fn do_compile(src: &str) -> String {
     return compile(src);
 }
 
+//TODO need a way to catch infinte loops
 pub fn compile(src: &str) -> String {
     match zeblang::make_parsetree(src.to_string()) {
         Ok(out) => match interpret(out) {
