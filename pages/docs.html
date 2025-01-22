@@ -5,170 +5,161 @@
   <link rel="stylesheet" href="/pages/stylesheet.css">
 </head>
 
-<div class="head_links">
-  <a href="/"> Interpreter </a>
-  <a href="#"> Docs </a>
-</div>
-
-<div class="flex-parent">
-  <div class="flex-child">
-    <p>
-      <a href="#installation-"> Installation </a>
-    </p>
-    <p>
-      <a href="#assigning-variables"> Variables </a>
-    </p>
-    <p>
-      <a href="#exit-"> Exit </a>
-    </p>
-    <p>
-      <a href="#maths"> Maths </a>
-    </p>
-    <p>
-      <a href="#if-statements-"> If Statements </a>
-    </p>
-    <p>
-      <a href="#while-loops-"> While Loops </a>
-    </p>
-    <p>
-      <a href="#arrays-on-the-stack"> Arrays </a>
-    </p>
+<div class="container">
+  <div class="head_links">
+    <a class="main-links"> ZEBLANG </a>
+    <a class="links main-links" href="/"> Interpreter </a>
+    <a class="links main-links" href="#"> Docs </a>
   </div>
 
-  <div class="flex-child">
-    <h1 id="zeblang-">ZebLang!</h1>
-    <p>Welcome to a very basic programming language WIP. Some of these features are only found on the development
-      branch!
-    </p>
-    <h2 id="installation-">Installation.</h2>
-    <p>first clone this repo </p>
-    <pre><code>git <span class="hljs-keyword">clone</span> <span
-          class="hljs-title">https</span>://github.com/zeb33n/zeblang.git
-      </code></pre>
-    <p>then you can build from source using cargo </p>
-    <pre><code>cargo build <span class="hljs-comment">--release</span>
-      </code></pre>
-    <p>the executable will be found inside <code>target/release</code> it is called <code>zeblang</code> add this to
-      your
-      <code>PATH</code> in <code>.bashrc</code>
-      Nice you can now run zeblang
-    </p>
-    <pre><code>zeblang <span class="hljs-built_in">file</span>.zb
-      </code></pre>
-    <p>to get the .asm file </p>
-    <pre><code>zeblang <span class="hljs-keyword">file</span>.zb -<span class="hljs-built_in">j</span>
-      </code></pre>
-    <p>to get the parse tree back as a .json</p>
-    <h2 id="features-">Features!</h2>
-    <h3 id="assigning-variables">Assigning Variables</h3>
-    <p>you can assign variables like so <code>x = 2</code>, you can also assign variables as a copy of another variable
-      <code>y = x</code>
-    </p>
-    <h3 id="exit-">Exit!</h3>
-    <p>You can exit your program with the following keyword <code>exit</code>, you can also provide an integer exit code
-    </p>
-    <pre><code><span class="hljs-keyword">exit</span> <span class="hljs-number">1</span>
-      </code></pre>
-    <p>exits with exit code 1</p>
-    <pre><code>x = <span class="hljs-number">2</span>
-        <span class="hljs-keyword">exit</span> x
-      </code></pre>
-    <p>exits with exit code 2</p>
-    <h3 id="maths">Maths</h3>
-    <p>Add stuff together!</p>
-    <pre><code>x = <span class="hljs-number">1</span> + <span class="hljs-number">1</span>
-        <span class="hljs-keyword">exit</span> x
-      </code></pre>
-    <p>exits with 2</p>
-    <p>Add as much stuff as you like!</p>
-    <pre><code>x = <span class="hljs-number">1</span> + <span class="hljs-number">2</span> + <span
-          class="hljs-number">3</span> + <span class="hljs-number">4</span>
-        <span class="hljs-keyword">exit</span> x
-      </code></pre>
-    <p>exits with 10</p>
-    <p>Add variables !</p>
-    <pre><code>x = <span class="hljs-number">1</span>
-        y = <span class="hljs-number">2</span>
-        <span class="hljs-keyword">exit</span> x + y
-      </code></pre>
-    <p>exits with 3</p>
-    <p>subtraction <code>-</code>, multiplication <code>*</code>, division <code>/</code> and modulo <code>%</code> are
-      also
-      supported. </p>
-    <p>operator precedance exists!</p>
-    <pre><code><span class="hljs-keyword">exit</span> (<span class="hljs-number">1</span> + <span
-          class="hljs-number">2</span>) * <span class="hljs-number">3</span> + <span class="hljs-number">1</span> *
-        <span class="hljs-number">1</span>
-      </code></pre>
-    <p>exits with 10</p>
-    <h3 id="if-statements-">If Statements!</h3>
-    <p>You can write if statements with the following syntax! 1 is true 0 is false. </p>
-    <pre><code>x = <span class="hljs-number">1</span>
-        if <span class="hljs-number">1</span>
-        x = <span class="hljs-number">2</span>
-        fi
-      </code></pre>
-    <p><code>x</code> will be equal to 2!</p>
-    <h3 id="while-loops-">While Loops!</h3>
-    <p>You can also write while loops! </p>
-    <pre><code>x = <span class="hljs-number">0</span>
-        i = <span class="hljs-number">10</span>
-        <span class="hljs-keyword">while</span> i
-        x = x + <span class="hljs-number">2</span>
-        i = i - <span class="hljs-number">1</span>
-        elihw
-        <span class="hljs-keyword">exit</span> x
-      </code></pre>
-    <p>exits with 20!</p>
-    <h3 id="arrays-on-the-stack">Arrays on the Stack</h3>
-    <p>You can declare stack allocated arrays like so </p>
-    <pre><code>my_array = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span
-          class="hljs-number">3</span>]
-      </code></pre>
-    <p>And index into Them. The below code will print the number <code>2</code></p>
-    <pre><code><span class="hljs-attr">_</span> = print(my_array[<span class="hljs-number">1</span>])
-      </code></pre>
-    <p>You can assign on an index </p>
-    <pre><code><span class="hljs-attr">my_array[1]</span> = <span class="hljs-number">5</span>
-      </code></pre>
-    <p>And preallocate an empty array onto the stack </p>
-    <pre><code><span class="hljs-attr">prealloc_array</span> = [size <span class="hljs-number">10</span>]
-      </code></pre>
-    <h3 id="for-loops-experimental-">For Loops (Experimental)</h3>
-    <p>for loops are here! </p>
-    <pre><code>for i in [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span
-          class="hljs-number">3</span>, <span class="hljs-number">4</span>]
-        _ = print(i)
-        rof
-      </code></pre>
-    <p>prints out <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code> </p>
-    <h3 id="functions-experimental-">Functions (Experimental)</h3>
-    <p>you can declare functions like so </p>
-    <pre><code>foo my_func(<span class="hljs-selector-tag">a</span>, b)
-        return <span class="hljs-selector-tag">a</span> + <span class="hljs-selector-tag">b</span>
-        oof
-      </code></pre>
-    <p>and call them </p>
-    <pre><code><span class="hljs-attr">x</span> = my_func(<span class="hljs-number">1</span>, <span
-          class="hljs-number">2</span>)
-      </code></pre>
-    <p>the value of x will be <code>3</code>! Functions also have scope meaning internal variables cannot be accessed
-      outside the function. </p>
-    <h2 id="examples-">Examples!</h2>
-    <p>check out this program that tells you whether the input is prime</p>
-    <pre><code>maybe_prime = <span class="hljs-number">127</span>
-        i = <span class="hljs-number">3</span>
-        out = <span class="hljs-number">1</span>
-        <span class="hljs-keyword">while</span> i != maybe_prime
-        <span class="hljs-keyword">if</span> maybe_prime % i == <span class="hljs-number">0</span>
-        out = <span class="hljs-number">0</span>
-        fi
-        i = i + <span class="hljs-number">1</span>
-        elihw
-        <span class="hljs-keyword">exit</span> out
-      </code></pre>
-    </span>
+  <div class="flex-parent">
+    <div class="flex-child">
+      <a class="links column-links" href="#installation-"> Installation </a>
+      <a class="links column-links" href="#assigning-variables"> Variables </a>
+      <a class="links column-links" href="#exit-"> Exit </a>
+      <a class="links column-links" href="#maths"> Maths </a>
+      <a class="links column-links" href="#if-statements-"> If Statements </a>
+      <a class="links column-links" href="#while-loops-"> While Loops </a>
+      <a class="links column-links" href="#arrays-on-the-stack"> Arrays </a>
+    </div>
+
+    <div class="flex-child">
+      <h1 id="zeblang-">ZEBLANG</h1>
+      <p>Welcome to a very basic programming language WIP. Some of these features are only found on the development
+        branch!
+      </p>
+      <h2 id="installation-">Installation.</h2>
+      <p>first clone this repo </p>
+      <pre><code>git <span class="hljs-keyword">clone</span> <span
+            class="hljs-title">https</span>://github.com/zeb33n/zeblang.git
+        </code></pre>
+      <p>then you can build from source using cargo </p>
+      <pre><code>cargo build <span class="hljs-comment">--release</span>
+        </code></pre>
+      <p>the executable will be found inside <code>target/release</code> it is called <code>zeblang</code> add this to
+        your
+        <code>PATH</code> in <code>.bashrc</code>
+        Nice you can now run zeblang
+      </p>
+      <pre><code>zeblang <span class="hljs-built_in">file</span>.zb
+        </code></pre>
+      <p>to get the .asm file </p>
+      <pre><code>zeblang <span class="hljs-keyword">file</span>.zb -<span class="hljs-built_in">j</span>
+        </code></pre>
+      <p>to get the parse tree back as a .json</p>
+      <h2 id="features-">Features!</h2>
+      <h3 id="assigning-variables">Assigning Variables</h3>
+      <p>you can assign variables like so <code>x = 2</code>, you can also assign variables as a copy of another
+        variable
+        <code>y = x</code>
+      </p>
+      <h3 id="exit-">Exit!</h3>
+      <p>You can exit your program with the following keyword <code>exit</code>, you can also provide an integer exit
+        code
+      </p>
+      <pre><code><span class="hljs-keyword">exit</span> <span class="hljs-number">1</span>
+        </code></pre>
+      <p>exits with exit code 1</p>
+      <pre><code>x = <span class="hljs-number">2</span>
+          <span class="hljs-keyword">exit</span> x
+        </code></pre>
+      <p>exits with exit code 2</p>
+      <h3 id="maths">Maths</h3>
+      <p>Add stuff together!</p>
+      <pre><code>x = <span class="hljs-number">1</span> + <span class="hljs-number">1</span>
+          <span class="hljs-keyword">exit</span> x
+        </code></pre>
+      <p>exits with 2</p>
+      <p>Add as much stuff as you like!</p>
+      <pre><code>x = <span class="hljs-number">1</span> + <span class="hljs-number">2</span> + <span
+            class="hljs-number">3</span> + <span class="hljs-number">4</span>
+          <span class="hljs-keyword">exit</span> x
+        </code></pre>
+      <p>exits with 10</p>
+      <p>Add variables !</p>
+      <pre><code>x = <span class="hljs-number">1</span>
+          y = <span class="hljs-number">2</span>
+          <span class="hljs-keyword">exit</span> x + y
+        </code></pre>
+      <p>exits with 3</p>
+      <p>subtraction <code>-</code>, multiplication <code>*</code>, division <code>/</code> and modulo <code>%</code>
+        are
+        also
+        supported. </p>
+      <p>operator precedance exists!</p>
+      <pre><code><span class="hljs-keyword">exit</span> (<span class="hljs-number">1</span> + <span
+            class="hljs-number">2</span>) * <span class="hljs-number">3</span> + <span class="hljs-number">1</span> *
+          <span class="hljs-number">1</span>
+        </code></pre>
+      <p>exits with 10</p>
+      <h3 id="if-statements-">If Statements!</h3>
+      <p>You can write if statements with the following syntax! 1 is true 0 is false. </p>
+      <pre><code>x = <span class="hljs-number">1</span>
+          if <span class="hljs-number">1</span>
+          x = <span class="hljs-number">2</span>
+          fi
+        </code></pre>
+      <p><code>x</code> will be equal to 2!</p>
+      <h3 id="while-loops-">While Loops!</h3>
+      <p>You can also write while loops! </p>
+      <pre><code>x = <span class="hljs-number">0</span>
+          i = <span class="hljs-number">10</span>
+          <span class="hljs-keyword">while</span> i
+          x = x + <span class="hljs-number">2</span>
+          i = i - <span class="hljs-number">1</span>
+          elihw
+          <span class="hljs-keyword">exit</span> x
+        </code></pre>
+      <p>exits with 20!</p>
+      <h3 id="arrays-on-the-stack">Arrays on the Stack</h3>
+      <p>You can declare stack allocated arrays like so </p>
+      <pre><code>my_array = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span
+            class="hljs-number">3</span>]
+        </code></pre>
+      <p>And index into Them. The below code will print the number <code>2</code></p>
+      <pre><code><span class="hljs-attr">_</span> = print(my_array[<span class="hljs-number">1</span>])
+        </code></pre>
+      <p>You can assign on an index </p>
+      <pre><code><span class="hljs-attr">my_array[1]</span> = <span class="hljs-number">5</span>
+        </code></pre>
+      <p>And preallocate an empty array onto the stack </p>
+      <pre><code><span class="hljs-attr">prealloc_array</span> = [size <span class="hljs-number">10</span>]
+        </code></pre>
+      <h3 id="for-loops-experimental-">For Loops (Experimental)</h3>
+      <p>for loops are here! </p>
+      <pre><code>for i in [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span
+            class="hljs-number">3</span>, <span class="hljs-number">4</span>]
+          _ = print(i)
+          rof
+        </code></pre>
+      <p>prints out <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code> </p>
+      <h3 id="functions-experimental-">Functions (Experimental)</h3>
+      <p>you can declare functions like so </p>
+      <pre><code>foo my_func(<span class="hljs-selector-tag">a</span>, b)
+          return <span class="hljs-selector-tag">a</span> + <span class="hljs-selector-tag">b</span>
+          oof
+        </code></pre>
+      <p>and call them </p>
+      <pre><code><span class="hljs-attr">x</span> = my_func(<span class="hljs-number">1</span>, <span
+            class="hljs-number">2</span>)
+        </code></pre>
+      <p>the value of x will be <code>3</code>! Functions also have scope meaning internal variables cannot be accessed
+        outside the function. </p>
+      <h2 id="examples-">Examples!</h2>
+      <p>check out this program that tells you whether the input is prime</p>
+      <pre><code>maybe_prime = <span class="hljs-number">127</span>
+          i = <span class="hljs-number">3</span>
+          out = <span class="hljs-number">1</span>
+          <span class="hljs-keyword">while</span> i != maybe_prime
+          <span class="hljs-keyword">if</span> maybe_prime % i == <span class="hljs-number">0</span>
+          out = <span class="hljs-number">0</span>
+          fi
+          i = i + <span class="hljs-number">1</span>
+          elihw
+          <span class="hljs-keyword">exit</span> out
+        </code></pre>
+      </span>
+    </div>
   </div>
-</div>
 
 </html>
