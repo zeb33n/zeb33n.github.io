@@ -4,23 +4,33 @@ use std::slice::Iter;
 use zeblang::{ExpressionNode, StatementNode};
 
 struct Interpreter<'a> {
-    vars: HashMap<String, i32>,
+    vars: &'a mut HashMap<String, i32>,
     iter: Iter<'a, StatementNode>,
     out: Result<i32, String>,
 }
 
 pub fn interpret(parse_tree: Vec<StatementNode>) -> Result<i32, String> {
+    let mut context: HashMap<String, i32> = HashMap::new();
     return Interpreter {
-        vars: HashMap::new(),
+        vars: &mut context,
         iter: parse_tree.iter(),
-        out: Err("Error".to_string()),
+        out: Ok(0),
     }
     .run();
 }
 
-// need to make a parse statement function we can call recursively
-// do we need to first translate everything into executable units that we then call in order
-// i think maybe so
+fn interpret_with_context(
+    parse_tree: Iter<'_, StatementNode>,
+    context: &'_ mut HashMap<String, i32>,
+) -> Result<i32, String> {
+    return Interpreter {
+        vars: context,
+        iter: parse_tree,
+        out: Ok(0),
+    }
+    .run();
+}
+
 impl<'a> Interpreter<'a> {
     fn run(&mut self) -> Result<i32, String> {
         let mut statement_option = self.iter.next();
@@ -42,20 +52,28 @@ impl<'a> Interpreter<'a> {
                 let value = self.interpret_expr(node)?;
                 self.vars.insert(name.to_owned(), value);
             }
-            StatementNode::While(node) => {
-                let mut next = self.iter.next().ok_or("While loop not closed")?;
-                let mut stmnts: Vec<&StatementNode> = Vec::new();
-                while next != &StatementNode::EndWhile {
-                    stmnts.push(next);
-                    next = self.iter.next().ok_or("While loop not closed")?;
-                }
-                while self.interpret_expr(node)? != 0 {
-                    for stmnt in stmnts.iter() {
-                        self.interpret_statement(stmnt)?;
-                    }
-                }
-            }
+            StatementNode::While(node) => self.interpret_while(node)?,
             _ => todo!(),
+        }
+        Ok(())
+    }
+
+    fn interpret_while(&mut self, node: &ExpressionNode) -> Result<(), String> {
+        let mut nests = 1;
+        let mut stmnts: Vec<StatementNode> = Vec::new();
+        while nests != 0 {
+            // we need to be able to swap this iterator out
+            let next = self.iter.next().ok_or("While loop not closed")?;
+            match next {
+                &StatementNode::EndWhile => nests -= 1,
+                &StatementNode::While(_) => nests += 1,
+                _ => (),
+            }
+            stmnts.push(next.to_owned());
+        }
+        stmnts.pop(); // remove last endwhile
+        while self.interpret_expr(node)? != 0 {
+            interpret_with_context(stmnts.iter(), self.vars)?;
         }
         Ok(())
     }
