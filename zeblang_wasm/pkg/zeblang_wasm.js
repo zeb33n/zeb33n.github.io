@@ -1,3 +1,5 @@
+import { print_to_html } from './snippets/zeblang_wasm-eae4755dafe5b43e/helpers.js';
+
 let wasm;
 
 const cachedTextDecoder = (typeof TextDecoder !== 'undefined' ? new TextDecoder('utf-8', { ignoreBOM: true, fatal: true }) : { decode: () => { throw Error('TextDecoder not available') } } );
@@ -127,6 +129,9 @@ function __wbg_get_imports() {
     imports.wbg = {};
     imports.wbg.__wbg_alert_0d5c631daeedc28e = function(arg0, arg1) {
         alert(getStringFromWasm0(arg0, arg1));
+    };
+    imports.wbg.__wbg_printtohtml_cfbd90561526a810 = function(arg0, arg1) {
+        print_to_html(getStringFromWasm0(arg0, arg1));
     };
     imports.wbg.__wbindgen_init_externref_table = function() {
         const table = wasm.__wbindgen_export_0;

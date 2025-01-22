@@ -1,6 +1,5 @@
 import init, {do_compile} from "../zeblang_wasm/pkg/zeblang_wasm.js";
 
-
 function getText() {
   return document.getElementById("codeEditor").value
 }

@@ -1,7 +1,13 @@
 use std::collections::HashMap;
 use std::slice::Iter;
+use wasm_bindgen::prelude::*;
 
 use zeblang::{ExpressionNode, StatementNode};
+
+#[wasm_bindgen(module = "/helpers.js")]
+extern "C" {
+    pub fn print_to_html(s: &str);
+}
 
 struct Interpreter<'a> {
     vars: &'a mut HashMap<String, i32>,
@@ -101,7 +107,21 @@ impl<'a> Interpreter<'a> {
                     _ => Err("Invalid Infix op".to_string()),
                 }
             }
+            ExpressionNode::Callable(name, nodes) => match name.as_str() {
+                "print" => self.interpret_print(nodes),
+                _ => todo!(),
+            },
             _ => todo!(),
         };
+    }
+
+    fn interpret_print(&mut self, nodes: &Vec<Box<ExpressionNode>>) -> Result<i32, String> {
+        if nodes.len() > 1 {
+            return Err("too many arguments to print".to_string());
+        };
+        let node = nodes.get(0).ok_or("No argument provided")?;
+        let out = self.interpret_expr(&*node)?;
+        print_to_html(&out.to_string());
+        return Ok(out);
     }
 }
