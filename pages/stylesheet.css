@@ -1,0 +1,30 @@
+textarea {
+  resize: none;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  padding: 12px 20px;
+  background-color: #f8f8f8;
+}
+
+.head_links {
+  position: sticky;
+  top: 0px;
+}
+
+.flex-parent {
+  display: flex;
+  width: 80%;
+}
+
+.flex-child {
+  max-height: 90vh;
+  padding: 12px 20px;
+  overflow: auto;
+  border: 2px solid blueviolet;
+  margin: 10px;
+}
+
+.flex-child:first-child {
+  flex: 0.3;
+  margin-right: 20px;
+}
