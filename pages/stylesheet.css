@@ -45,6 +45,7 @@ textarea {
 
 .flex-parent {
   display: flex;
+  min-width: 100%;
 }
 
 .flex-child {
@@ -63,6 +64,6 @@ textarea {
 }
 
 .flex-child:first-child {
-  flex: 0.1;
+  flex: 0.2;
   margin-right: 20px;
 }
