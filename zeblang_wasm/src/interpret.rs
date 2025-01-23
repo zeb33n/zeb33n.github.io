@@ -49,6 +49,7 @@ impl<'a> Interpreter<'a> {
 
     fn interpret_statement(&mut self, statement: &StatementNode) -> Result<(), String> {
         match statement {
+            // TODO exit is currently more of a return. jsut exits current context
             StatementNode::Exit(node) => {
                 self.out = self.interpret_exit(node);
                 return Ok(());
@@ -58,7 +59,28 @@ impl<'a> Interpreter<'a> {
                 self.vars.insert(name.to_owned(), value);
             }
             StatementNode::While(node) => self.interpret_while(node)?,
+            StatementNode::If(node) => self.interpret_if(node)?,
             _ => todo!(),
+        }
+        Ok(())
+    }
+
+    // TODO Clean up repeated code. Functions and for loops will also likely be similar
+    fn interpret_if(&mut self, node: &ExpressionNode) -> Result<(), String> {
+        let mut nests = 1;
+        let mut stmnts: Vec<StatementNode> = Vec::new();
+        while nests != 0 {
+            let next = self.iter.next().ok_or("While loop not closed")?;
+            match next {
+                &StatementNode::EndIf => nests -= 1,
+                &StatementNode::If(_) => nests += 1,
+                _ => (),
+            }
+            stmnts.push(next.to_owned());
+        }
+        stmnts.pop(); // remove last endif
+        if self.interpret_expr(node)? != 0 {
+            interpret_with_context(stmnts.iter(), self.vars)?;
         }
         Ok(())
     }
