@@ -1,4 +1,4 @@
-import init, {do_compile} from "../zeblang_wasm/pkg/zeblang_wasm.js";
+import init, {interpret_zeblang} from "../zeblang_wasm/pkg/zeblang.js";
 
 function getText() {
   return document.getElementById("codeEditor").value
@@ -11,7 +11,7 @@ function hw() {
    stdout.innerHTML = "";
    stdexit.innerHTML = "";
    stdexit.innerHTML += "exit: ";
-   stdexit.innerHTML += do_compile(getText());
+   stdexit.innerHTML += interpret_zeblang(getText());
  });
 }
 
