@@ -11,6 +11,7 @@ function hw() {
    stdout.innerHTML = "";
    stdexit.innerHTML = "";
    stdexit.innerHTML += "exit: ";
+   console.log(getText());
    stdexit.innerHTML += interpret_zeblang(getText());
  });
 }
