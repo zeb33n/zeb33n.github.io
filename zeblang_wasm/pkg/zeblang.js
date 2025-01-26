@@ -1,4 +1,4 @@
-import { print_to_html } from './snippets/zeblang_wasm-eae4755dafe5b43e/helpers.js';
+import { zeblang_print } from './snippets/zeblang-b91bc2d2cb71eaf6/helpers.js';
 
 let wasm;
 
@@ -79,13 +79,13 @@ function passStringToWasm0(arg, malloc, realloc) {
  * @param {string} src
  * @returns {string}
  */
-export function do_compile(src) {
+export function interpret_zeblang(src) {
     let deferred2_0;
     let deferred2_1;
     try {
         const ptr0 = passStringToWasm0(src, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
-        const ret = wasm.do_compile(ptr0, len0);
+        const ret = wasm.interpret_zeblang(ptr0, len0);
         deferred2_0 = ret[0];
         deferred2_1 = ret[1];
         return getStringFromWasm0(ret[0], ret[1]);
@@ -128,8 +128,8 @@ async function __wbg_load(module, imports) {
 function __wbg_get_imports() {
     const imports = {};
     imports.wbg = {};
-    imports.wbg.__wbg_printtohtml_cfbd90561526a810 = function(arg0, arg1) {
-        print_to_html(getStringFromWasm0(arg0, arg1));
+    imports.wbg.__wbg_zeblangprint_22241367b872a5c1 = function(arg0, arg1) {
+        zeblang_print(getStringFromWasm0(arg0, arg1));
     };
     imports.wbg.__wbindgen_init_externref_table = function() {
         const table = wasm.__wbindgen_export_0;
@@ -197,7 +197,7 @@ async function __wbg_init(module_or_path) {
     }
 
     if (typeof module_or_path === 'undefined') {
-        module_or_path = new URL('zeblang_wasm_bg.wasm', import.meta.url);
+        module_or_path = new URL('zeblang_bg.wasm', import.meta.url);
     }
     const imports = __wbg_get_imports();
 

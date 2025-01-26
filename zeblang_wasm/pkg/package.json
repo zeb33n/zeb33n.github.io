@@ -1,14 +1,14 @@
 {
-  "name": "zeblang_wasm",
+  "name": "zeblang",
   "type": "module",
   "version": "0.1.0",
   "files": [
-    "zeblang_wasm_bg.wasm",
-    "zeblang_wasm.js",
-    "zeblang_wasm.d.ts"
+    "zeblang_bg.wasm",
+    "zeblang.js",
+    "zeblang.d.ts"
   ],
-  "main": "zeblang_wasm.js",
-  "types": "zeblang_wasm.d.ts",
+  "main": "zeblang.js",
+  "types": "zeblang.d.ts",
   "sideEffects": [
     "./snippets/*"
   ]
