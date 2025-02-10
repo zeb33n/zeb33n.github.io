@@ -16,13 +16,19 @@
     </div>
 
 
-    <div id="interpreter">
-      <p>
-        <button id="runBtn">run zeblang</button>
-      </p>
-      <textarea id="codeEditor" rows="25" cols="80"></textarea>
-      <div id="stdout"></div>
-      <div id="stdexit"></div>
+    <p>
+      <button id="runBtn">run zeblang</button>
+    </p>
+    <div id="interpreter" class="flex-parent">
+      <div class="flex-step-child">
+        <canvas id="zext" class="zext" height="1700" width="1600" tabindex="1"></canvas>
+      </div>
+      <div class="flex-step-child sudo-tty">
+        <div> Standard Out </div>
+        <div id="stdout" class="stdout"></div>
+        <div> Exit Code </div>
+        <div id="stdexit" class="stdexit"></div>
+      </div>
     </div>
   </div>
 

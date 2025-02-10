@@ -1,8 +1,28 @@
-textarea {
-  resize: none;
+.zext {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.sudo-tty {
+  padding: 12px 20px;
+}
+
+.stdexit {
+  font-family: monospace;
+  border-radius: 4px;
   border: 2px solid #ccc;
+  min-height: 10%;
+  background-color: #f8f8f8;
+}
+
+.stdout {
+  border: 2px solid #ccc;
+  font-family: monospace;
   border-radius: 4px;
   padding: 12px 20px;
+  overflow: scroll;
+  min-height: 75%;
+  max-height: 75%;
   background-color: #f8f8f8;
 }
 
@@ -46,6 +66,11 @@ textarea {
 .flex-parent {
   display: flex;
   min-width: 100%;
+}
+
+.flex-step-child {
+  flex: 1;
+  max-height: 90vh;
 }
 
 .flex-child {

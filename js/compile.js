@@ -1,7 +1,8 @@
 import init, {interpret_zeblang} from "../zeblang_wasm/pkg/zeblang.js";
+import {zext_dump_text} from "../zext/zext.js";
 
 function getText() {
-  return document.getElementById("codeEditor").value
+  return zext_dump_text();
 }
 
 function hw() {
