@@ -1,6 +1,8 @@
 .zext {
   max-width: 100%;
   max-height: 100%;
+  border: 2px solid #ccc;
+  border-radius: 4px;
 }
 
 .sudo-tty {
