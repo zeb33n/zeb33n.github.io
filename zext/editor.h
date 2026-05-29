@@ -11,9 +11,11 @@ void js_dump_line(char* msg);
 
 // EXPORTS
 void editor_keypress(char c);
+void editor_click(int x, int y);
 void editor_special_keypress(char c);
 void editor_init(int w, int h, int font_size);
 void editor_dump_text();
+void editor_set_colours(int bgrd, int txt, int bgrd_margin, int txt_margin);
 
 // DEFINITIONS
 #define NULL (void*)0
@@ -22,7 +24,7 @@ void editor_dump_text();
 #define BGRD_COL 0xFF3c3836
 #define TEXT_COL 0xFF548588
 #define TEXT_COL_MARGIN 0xFF8ec07c
-#define BGRD_COL_MARGIN 0xFF3c3836
+#define BGRD_COL_MARGIN 0xFFcc3836
 
 // INTERNAL DECLARATIONS
 enum KeysSpecial {
@@ -36,6 +38,13 @@ enum KeysSpecial {
   DELETE = 46,
 };
 
+typedef struct Colours {
+  int bgrd;
+  int txt;
+  int bgrd_margin;
+  int txt_margin;
+} Colours;
+
 typedef struct Screen {
   int width_cs;
   int height_cs;
@@ -45,6 +54,7 @@ typedef struct Screen {
   int cursor_y_os;
   int margin_w_cs;
   char* text;
+  Colours colours;
 } Screen;
 
 typedef struct Coord {
@@ -66,6 +76,7 @@ void cursor_clear();
 void cursor_mov_lr(int d);
 void cursor_render();
 void cursor_mov_ud(int d);
+void cursor_set_pos(Coord pos_px);
 
 // hack for global -> should probably make its own file with getters and
 // setters.

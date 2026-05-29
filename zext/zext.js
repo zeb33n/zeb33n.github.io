@@ -70,7 +70,7 @@ function get_text(msg) {
 
 const wasm_path = new URL('editor.wasm', import.meta.url);
 
-WebAssembly.instantiateStreaming(fetch(wasm_path), {
+w = await WebAssembly.instantiateStreaming(fetch(wasm_path), {
     env: {
         js_fill_rect,
         js_write_char,
@@ -79,9 +79,12 @@ WebAssembly.instantiateStreaming(fetch(wasm_path), {
         js_unwrite_char,
         js_dump_line,
     }
-}).then((wasm) => {
-    w = wasm;
+})
+
+export function zext_init() {
     w.instance.exports.editor_init(app.width, app.height, 50);
+
+    // keypress
     app.addEventListener("keydown", (c) =>  {
       if (c.key.length > 1) {
         w.instance.exports.editor_special_keypress(c.keyCode);
@@ -89,12 +92,37 @@ WebAssembly.instantiateStreaming(fetch(wasm_path), {
         w.instance.exports.editor_keypress(c.key.charCodeAt());
       }
     });
-   }
-);
+
+    // clicking
+    app.addEventListener("click", (e) => {
+        const rect = app.getBoundingClientRect();
+        // Convert viewport coords -> canvas coords
+        const scaleX = app.width / rect.width;
+        const scaleY = app.height / rect.height;
+        const x = (e.clientX - rect.left) * scaleX;
+        const y = (e.clientY - rect.top) * scaleY;
+
+        w.instance.exports.editor_click(x, y);
+    });
+
+    // mouse over
+    app.addEventListener("mousemove", (_) => {
+        app.style.cursor = "text";
+    });
+}
 
 export function zext_dump_text() {
   text = ""
   w.instance.exports.editor_dump_text();
   const text_copy = (' ' + text).slice(1);
   return text_copy;
+}
+
+export function zext_set_colours(bgrd, txt, bgrd_margin, txt_margin) {
+  const b = parseInt("0xFF" + bgrd, 16);
+  const t = parseInt("0xFF" + txt, 16);
+  const bm = parseInt("0xFF" + bgrd_margin, 16);
+  const tm = parseInt("0xFF" + txt_margin, 16);
+  console.log(b)
+  w.instance.exports.editor_set_colours(b, t, bm, tm);
 }

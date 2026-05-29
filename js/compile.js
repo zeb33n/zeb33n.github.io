@@ -1,5 +1,8 @@
 import init, {interpret_zeblang} from "../zeblang_wasm/pkg/zeblang.js";
-import {zext_dump_text} from "../zext/zext.js";
+import {zext_dump_text, zext_init, zext_set_colours} from "../zext/zext.js"
+
+zext_set_colours("f8f8f8", "050505", "f1f1f1", "cccccc");
+zext_init();
 
 // add waiting page for initialisation
 await init();
